@@ -5,8 +5,6 @@ URL: pages/knocknagow.html
 Slug: knocknagow
 Tags: Steam Tug, River Suir, River Barrow, Slaney, Lough Derg
 
-# Little Knocknagow — Steam Tug (Lanarkshire c.1890)
-
 ![Little Knocknagow at Dromineer]({static}/images/vessels/little_knocknagow/unassigned/little_knocknagow_dromineer.jpg)
 *Little Knocknagow based at Dromineer on Lough Derg.*
 

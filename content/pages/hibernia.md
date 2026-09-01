@@ -1,11 +1,9 @@
-Title: Hibernia — Historic Barge
+Title: Barge Hibernia — History & Community Legacy
 Date: 2026-09-01
 Save_as: pages/bargehibernia.html
 URL: pages/bargehibernia.html
 Slug: bargehibernia
 Tags: Launch, Maintenance, Lough Derg, Lough Ree, Lough Neagh
-
-# Barge Hibernia — History & Community Legacy
 
 ![Barge Hibernia]({static}/images/vessels/hibernia/hibernia_old.jpg)
 *Barge Hibernia — Built by Portadown Foundry in 1912, a unique Lagan lighter and early pleasure conversion.*
