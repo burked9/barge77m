@@ -120,7 +120,7 @@ nav a:hover {
 }
 
 .full-width-banner {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/banner_full.webp');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('../images/global-bg.jpg');
     background-size: cover;
     background-position: center;
     height: 60vh;
