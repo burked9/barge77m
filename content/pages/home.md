@@ -27,4 +27,4 @@ From her commercial carrying years under CIE to her service as a Priestman dredg
 *   **[Little Knocknagow — Steam Tug]({filename}/pages/little_knocknagow.md)** — c.1890 Lanarkshire steam tug, dredging vessel, and coastal cruiser.
 
 ---
-*Explore all vessels on our [Vessels Index]({filename}/pages/fleet.md) or read about our [Memories & Community Events]({filename}/pages/memories.md).*
+*Explore all vessels on our [Vessels Index]({filename}/pages/fleet.md) or view our [Photo Gallery]({filename}/pages/gallery.md).*

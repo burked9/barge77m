@@ -8,4 +8,4 @@ The **77M Vessel Archive** is a dedicated historical repository celebrating Irel
 
 Maintained by skipper **Daniel Burke** from Church Bay on Lough Derg, County Clare, this site documents active vessel restorations, captain's logbooks, historical research, and community fundraising events hosted aboard historic craft.
 
-Explore our [Vessels Registry]({filename}/pages/fleet.md) or read about our [Memories & Community Events]({filename}/pages/memories.md).
+Explore our [Vessels Registry]({filename}/pages/fleet.md) or view our [Photo Gallery]({filename}/pages/gallery.md).

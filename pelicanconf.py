@@ -19,10 +19,9 @@ DISPLAY_PAGES_ON_MENU = False
 MENUITEMS = (
     ('Home', '/'),
     ('About', '/pages/about.html'),
-    ('Latest News', '/pages/news.html'),
     ('Publications & References', '/pages/references.html'),
     ('Vessels', '/pages/vessels.html'),
-    ('Memories', '/pages/memories.html'),
+    ('Gallery', '/pages/gallery.html'),
     ('Contact', '/pages/contact.html'),
 )
 
