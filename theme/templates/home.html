@@ -4,7 +4,20 @@
 <section class="hero full-width-banner">
     <div class="hero-content">
         <h1>Welcome to {{ SITENAME }}</h1>
-        <p class="tagline">Captain's Logbook, History & Restoration of 77.M</p>
+        <p class="tagline">Captain's Logbook, History & Floating Heritage</p>
+
+        <!-- Live JavaScript Search Widget -->
+        <div class="search-box-wrapper">
+            <div class="search-input-group">
+                <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="site-search-input" placeholder="Search 77M, Hibernia, Knocknagow, logs & history..." autocomplete="off">
+                <button type="button" id="search-clear-btn" style="display:none;" aria-label="Clear search">&times;</button>
+            </div>
+            <div id="search-results-dropdown" class="search-results-dropdown" style="display:none;"></div>
+        </div>
     </div>
 </section>
 
@@ -17,4 +30,130 @@
     {% endfor %}
     {% endif %}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('site-search-input');
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    const searchResults = document.getElementById('search-results-dropdown');
+
+    const searchIndex = [
+        {
+            title: "77M — Workboat & Dredger",
+            category: "Vessel Profile & Logbook",
+            url: "{{ SITEURL }}/pages/77m.html",
+            keywords: "77m 77.m canal boat workboat dredger ringsend dockyard mcmillen 1937 bolinder lister banagher edenderry daingean portumna church bay lough derg daniel burke logbook restoration"
+        },
+        {
+            title: "Barge Hibernia",
+            category: "Vessel Profile",
+            url: "{{ SITEURL }}/pages/bargehibernia.html",
+            keywords: "hibernia barge lighter portadown foundry 1912 lagan upper bann mud bucket toome lough neagh lough ree portaneena perkins bowthruster"
+        },
+        {
+            title: "Little Knocknagow — Steam Tug",
+            category: "Vessel Profile",
+            url: "{{ SITEURL }}/pages/knocknagow.html",
+            keywords: "little knocknagow knocknagow II steam tug lanarkshire steel Scotland 1890 forth clyde suir barrow carrick dowleys bolinder roadstone slaney brownswood richard miller dromineer lough derg goggin"
+        },
+        {
+            title: "Vessels Registry & Index",
+            category: "Vessels List",
+            url: "{{ SITEURL }}/pages/vessels.html",
+            keywords: "vessels fleet list 77m hibernia knocknagow workboats barges tugs inland waterways registry"
+        },
+        {
+            title: "Publications, References & Sources",
+            category: "Archival Sources",
+            url: "{{ SITEURL }}/pages/references.html",
+            keywords: "publications references sources ringsend dockyard lanarkshire waterways ireland dr power michael coady nationalist jack oneill theo harris richard miller"
+        },
+        {
+            title: "Photo Gallery & Media Collections",
+            category: "Photo Gallery",
+            url: "{{ SITEURL }}/pages/gallery.html",
+            keywords: "gallery photos pictures media archival images restoration working season lough derg dromineer"
+        },
+        {
+            title: "About the 77M Archive",
+            category: "About",
+            url: "{{ SITEURL }}/pages/about.html",
+            keywords: "about archive floating heritage daniel burke church bay lough derg co clare ireland inland waterways"
+        },
+        {
+            title: "Contact & Inquiries",
+            category: "Contact",
+            url: "{{ SITEURL }}/pages/contact.html",
+            keywords: "contact email phone location daniel burke whitegate co clare ireland"
+        }
+    ];
+
+    function renderResults(matches, query) {
+        if (!matches || matches.length === 0) {
+            searchResults.innerHTML = '<div class="search-no-results">No matching vessels or articles found for "<strong>' + escapeHtml(query) + '</strong>"</div>';
+            searchResults.style.display = 'block';
+            return;
+        }
+
+        let html = '<div class="search-results-header">Search Results (' + matches.length + ')</div><ul>';
+        matches.forEach(item => {
+            html += '<li>';
+            html += '<a href="' + item.url + '">';
+            html += '<div class="search-res-title">' + highlightText(item.title, query) + '</div>';
+            html += '<div class="search-res-cat">' + item.category + '</div>';
+            html += '</a>';
+            html += '</li>';
+        });
+        html += '</ul>';
+        searchResults.innerHTML = html;
+        searchResults.style.display = 'block';
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, function(m) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+        });
+    }
+
+    function highlightText(text, query) {
+        if (!query) return escapeHtml(text);
+        const q = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp('(' + q + ')', 'gi');
+        return escapeHtml(text).replace(regex, '<mark>$1</mark>');
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            if (query.length === 0) {
+                searchResults.style.display = 'none';
+                searchClearBtn.style.display = 'none';
+                return;
+            }
+
+            searchClearBtn.style.display = 'block';
+            const matches = searchIndex.filter(item => {
+                return item.title.toLowerCase().includes(query) || 
+                       item.category.toLowerCase().includes(query) || 
+                       item.keywords.toLowerCase().includes(query);
+            });
+
+            renderResults(matches, query);
+        });
+
+        searchClearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            searchResults.style.display = 'none';
+            searchClearBtn.style.display = 'none';
+            searchInput.focus();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
 {% endblock %}
