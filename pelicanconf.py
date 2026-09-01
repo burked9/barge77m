@@ -18,10 +18,10 @@ AUTHOR_FEED_RSS = None
 DISPLAY_PAGES_ON_MENU = False
 MENUITEMS = (
     ('Home', '/'),
-    ('About', '/pages/about.html'),
-    ('Publications & References', '/pages/references.html'),
     ('Vessels', '/pages/vessels.html'),
     ('Gallery', '/pages/gallery.html'),
+    ('Publications & References', '/pages/references.html'),
+    ('About', '/pages/about.html'),
     ('Contact', '/pages/contact.html'),
 )
 

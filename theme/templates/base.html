@@ -31,7 +31,20 @@
                 <nav class="site-nav">
                     <ul>
                         {% for title, link in MENUITEMS %}
+                        {% if title == 'Vessels' %}
+                        <li class="nav-has-dropdown">
+                            <a href="{{ SITEURL }}{{ link }}" class="dropdown-toggle">{{ title }} <span class="dropdown-caret">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ SITEURL }}/pages/vessels.html" class="dropdown-header-item">⚓ All Vessels Registry</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a href="{{ SITEURL }}/pages/77m.html">77M — Workboat & Dredger</a></li>
+                                <li><a href="{{ SITEURL }}/pages/bargehibernia.html">Barge Hibernia</a></li>
+                                <li><a href="{{ SITEURL }}/pages/knocknagow.html">Little Knocknagow — Steam Tug</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
                         <li><a href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                 </nav>
