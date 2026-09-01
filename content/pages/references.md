@@ -2,8 +2,6 @@ Title: Publications & References
 Date: 2026-09-01
 Save_as: pages/references.html
 
-# Publications, References & Archival Sources
-
 A collection of historical references, yard build records, newspaper archives, and oral history accounts for 77M, Little Knocknagow, and Irish inland waterways craft.
 
 ## Reference Bibliography
