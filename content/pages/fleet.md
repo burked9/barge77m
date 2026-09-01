@@ -1,31 +1,40 @@
-Title: Fleet Overview
-Date: 2026-08-28
-Save_as: pages/fleet.html
+Title: Vessels
+Date: 2026-09-01
+Save_as: pages/vessels.html
 
-# 77M Vessel Fleet & Archival Records
+# Archival Vessel Registry
 
-The **77M Fleet** encompasses a series of workboats and barges dedicated to marine operations, community engagement, and non-profit support.
+Welcome to the **Vessel Archive**, showcasing historic workboats, barges, and steam tugs of the Irish Inland Waterways.
 
-## Active & Featured Vessels
+---
+
+## Featured Historic Vessels
+
+*   ### [77M — Workboat & Dredger]({filename}/pages/77m.md)
+    *   **Built:** 1937 (Ringsend Dockyard Company, McMillen boat)
+    *   **Dimensions:** 61 ft 9 in x 13 ft 3 in
+    *   **Overview:** One of the last surviving Grand Canal workboats and Priestman dredgers, currently undergoing active restoration at Church Bay on Lough Derg.
 
 *   ### [Barge Hibernia]({filename}/pages/hibernia.md)
-    *   *Role:* Community Event Platform, Workboat, Historical Vessel
-    *   *Status:* Active / Archival Record
-    *   *Key Highlights:* Host to multiple charity fundraisers, community events, and maritime heritage projects.
+    *   **Type:** Traditional Inland Waterways Barge
+    *   **Overview:** Distinct historic vessel serving as a platform for community fundraisers, non-profit events, and inland navigation heritage.
+
+*   ### [Little Knocknagow — Steam Tug]({filename}/pages/little_knocknagow.md)
+    *   **Built:** c. 1890s (Lanarkshire Steel Co Ltd, Scotland)
+    *   **Dimensions:** 61 ft x 12 ft 6 in (Shortened for Grand Canal locks)
+    *   **Overview:** Historic Suir and Barrow steam tug, later dredging vessel and coastal cruiser, currently based at Dromineer on Lough Derg.
 
 ---
 
-## Archival Fleet Registry (77M Class)
+## Archival Fleet Registry (77M & Historic Fleet)
 
-Below is the master registry for the 77M class vessels as archival records and historical data are migrated over time:
-
-1. **77M-01: Hibernia** — *[View Profile & History]({filename}/pages/hibernia.md)*
-2. **77M-02: Vessel 02** — *[Archival Record Coming Soon]*
-3. **77M-03: Vessel 03** — *[Archival Record Coming Soon]*
-4. **77M-04: Vessel 04** — *[Archival Record Coming Soon]*
-5. **77M-05: Vessel 05** — *[Archival Record Coming Soon]*
-6. **77M-06: Vessel 06** — *[Archival Record Coming Soon]*
-7. **77M-07: Vessel 07** — *[Archival Record Coming Soon]*
+1. **77M** — *[View Profile & Captain's Logbook]({filename}/pages/77m.md)*
+2. **Barge Hibernia** — *[View Profile & Community Record]({filename}/pages/hibernia.md)*
+3. **Little Knocknagow** — *[View Profile & History]({filename}/pages/little_knocknagow.md)*
+4. **Vessel 04** — *[Archival Record Coming Soon]*
+5. **Vessel 05** — *[Archival Record Coming Soon]*
+6. **Vessel 06** — *[Archival Record Coming Soon]*
+7. **Vessel 07** — *[Archival Record Coming Soon]*
 
 ---
-*For information regarding past charity events or vessel history, visit the [Fundraisers Page]({filename}/pages/fundraisers.md).*
+*Visit [Memories & Fundraisers]({filename}/pages/fundraisers.md) or explore [Publications & References]({filename}/pages/references.md).*

@@ -18,9 +18,11 @@ AUTHOR_FEED_RSS = None
 DISPLAY_PAGES_ON_MENU = False
 MENUITEMS = (
     ('Home', '/'),
-    ('Fleet', '/pages/fleet.html'),
-    ('Hibernia', '/pages/hibernia.html'),
-    ('Charity & Fundraisers', '/pages/fundraisers.html'),
+    ('About', '/pages/about.html'),
+    ('Latest News', '/pages/news.html'),
+    ('Publications & References', '/pages/references.html'),
+    ('Vessels', '/pages/vessels.html'),
+    ('Memories', '/pages/memories.html'),
     ('Contact', '/pages/contact.html'),
 )
 
