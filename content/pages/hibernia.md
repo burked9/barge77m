@@ -1,8 +1,8 @@
 Title: Hibernia — Historic Barge
 Date: 2026-09-01
-Save_as: pages/hibernia-historic-barge.html
-URL: pages/hibernia-historic-barge.html
-Slug: hibernia-historic-barge
+Save_as: pages/bargehibernia.html
+URL: pages/bargehibernia.html
+Slug: bargehibernia
 Tags: Launch, Maintenance, Lough Derg, Lough Ree, Lough Neagh
 
 # Barge Hibernia — History & Community Legacy
