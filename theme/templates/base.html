@@ -16,18 +16,26 @@
 
 <body>
     <header class="site-header">
-        <div class="container">
+        <div class="header-brand-container container">
             <a href="{{ SITEURL }}/" class="site-logo-link">
                 <img src="{{ SITEURL }}/theme/images/logo.png" alt="{{ SITENAME }} Logo" class="site-logo">
-                <span class="site-title">{{ SITENAME }}</span>
+                <div class="brand-text">
+                    <span class="site-title">{{ SITENAME }}</span>
+                    <div class="site-title-divider"></div>
+                    <span class="site-tagline">Celebrating Ireland's floating heritage</span>
+                </div>
             </a>
-            <nav>
-                <ul>
-                    {% for title, link in MENUITEMS %}
-                    <li><a href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
+        </div>
+        <div class="nav-bar-wrapper">
+            <div class="container">
+                <nav class="site-nav">
+                    <ul>
+                        {% for title, link in MENUITEMS %}
+                        <li><a href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
