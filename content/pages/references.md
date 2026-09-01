@@ -17,5 +17,9 @@ A collection of historical references, yard build records, newspaper archives, a
     *   Jack O'Neill — Waterford railway and lighterage historical records.
     *   Theo Harris, William O'Callaghan, Sean Barrett, and Richard Miller oral accounts & restoration logs (1975–2004).
 
+## 77M Captain's Logbook Blog Archive
+*   **Original WordPress Logbook:** [barge77m.wordpress.com](https://barge77m.wordpress.com/) — Original restoration notes, engine rebuild logs, winterisation records, and rally stories.
+*   **Searchable Logbook Archive:** [77M Captain's Logbook Archive]({filename}/pages/logbook.md) — Compiled continuous logbook entries with entry cards and quick jumps.
+
 ---
 *Explore [Vessels]({filename}/pages/fleet.md) or return to [Home]({filename}/pages/home.md).*
