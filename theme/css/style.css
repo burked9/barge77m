@@ -10,8 +10,8 @@
     --text-color: #3d2b1f;
     /* Dark Coffee */
     --white: #ffffff;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --font-heading: 'Geist', 'Montserrat', sans-serif;
+    --font-body: 'Geist', 'Open Sans', sans-serif;
 }
 
 body {
