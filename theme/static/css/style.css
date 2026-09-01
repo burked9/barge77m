@@ -311,14 +311,50 @@ img {
 .site-footer {
     background-color: var(--primary-color);
     color: var(--white);
-    text-align: center;
     padding: 2rem 0;
     margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-left p {
+    margin: 0.25rem 0;
 }
 
 .contact-info {
     font-size: 0.9rem;
     opacity: 0.8;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-todo-link {
+    color: rgba(255, 255, 255, 0.75);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.footer-todo-link:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive */
