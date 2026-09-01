@@ -1,0 +1,516 @@
+{% extends "base.html" %}
+
+{% block title %}River Monitor – {{ SITENAME }}{% endblock %}
+
+{% block content %}
+
+<!-- Override main container styling for this page only -->
+<style>
+  /* Dark panel fills the content area edge-to-edge */
+  main.container {
+    max-width: 100%;
+    padding: 0;
+    background: #0f1117;
+  }
+
+  .rm-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+  }
+
+  /* ── Reset & variables ── */
+  .rm-wrap * { box-sizing: border-box; }
+
+  :root {
+    --rm-bg:     #0f1117;
+    --rm-card:   #1a1d27;
+    --rm-border: #2a2d3a;
+    --rm-text:   #e2e8f0;
+    --rm-muted:  #64748b;
+  }
+
+  /* ── Page header bar (sits between site nav and dashboard) ── */
+  .rm-page-header {
+    background: #1a1d27;
+    border-bottom: 1px solid #2a2d3a;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .rm-page-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+  .rm-page-header h1 span { color: #e2e8f0; }
+  #rm-last-updated { font-size: 0.75rem; color: #64748b; text-align: right; line-height: 1.8; }
+
+  /* ── State Hero ── */
+  #rm-state-hero {
+    margin: 20px 0 0;
+    background: #064e3b;
+    border: 1px solid #059669;
+    border-radius: 14px;
+    padding: 26px 22px;
+    text-align: center;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  #rm-state-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #34d399;
+    transition: color 0.4s;
+  }
+  #rm-state-subtitle {
+    font-size: 0.85rem;
+    color: #34d399;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* ── Level display ── */
+  #rm-level-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .rm-level-block { text-align: center; }
+  .rm-level-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #34d399;
+    line-height: 1;
+    transition: color 0.4s;
+  }
+  .rm-level-unit { font-size: 0.78rem; color: #64748b; margin-top: 4px; font-family: 'Open Sans', sans-serif; }
+  .rm-level-divider { font-size: 2rem; color: #2a2d3a; align-self: center; }
+
+  /* ── Stats grid ── */
+  .rm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  @media (max-width: 480px) { .rm-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .rm-stat-card {
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 13px 15px;
+  }
+  .rm-stat-card .rm-label {
+    font-size: 0.7rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .rm-stat-card .rm-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 4px;
+    color: #e2e8f0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .rm-stat-card .rm-sub {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 2px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* ── Threshold bar ── */
+  #rm-threshold-section {
+    margin-top: 14px;
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  #rm-threshold-section .rm-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  #rm-bar-bg {
+    height: 10px;
+    background: #0f1117;
+    border-radius: 5px;
+    position: relative;
+    overflow: visible;
+  }
+  #rm-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #3b82f6 0%, #f59e0b 70%, #ef4444 100%);
+    transition: width 0.6s ease;
+    max-width: 100%;
+  }
+  #rm-threshold-marker {
+    position: absolute; top: -4px;
+    width: 2px; height: 18px;
+    background: #ef4444; border-radius: 1px;
+  }
+  #rm-threshold-marker::after {
+    content: 'Flood';
+    position: absolute; top: -18px; left: 4px;
+    font-size: 0.65rem; color: #ef4444; white-space: nowrap;
+    font-family: 'Open Sans', sans-serif;
+  }
+  #rm-warn-marker {
+    position: absolute; top: -4px;
+    width: 2px; height: 18px;
+    background: #f59e0b; border-radius: 1px;
+  }
+  #rm-warn-marker::after {
+    content: 'Watch';
+    position: absolute; top: -18px; left: 4px;
+    font-size: 0.65rem; color: #f59e0b; white-space: nowrap;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* ── Charts ── */
+  .rm-chart-section {
+    margin-top: 14px;
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .rm-chart-section h2 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .rm-chart-wrap { position: relative; height: 160px; }
+  .rm-chart-wrap.tall { height: 210px; }
+
+  /* ── Error banner ── */
+  #rm-error {
+    display: none;
+    margin-top: 12px;
+    background: #450a0a;
+    border: 1px solid #ef4444;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #fca5a5;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* ── Loading ── */
+  #rm-loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  /* ── Data note ── */
+  .rm-footer-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: #475569;
+    margin-top: 20px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 2;
+  }
+  .rm-footer-note a { color: #475569; text-decoration: underline; }
+</style>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- Page header bar -->
+<div class="rm-page-header">
+  <h1>River Shannon &mdash; <span>Banagher Bridge</span></h1>
+  <div id="rm-last-updated">
+    <div id="rm-reading-time">—</div>
+    <div id="rm-countdown">Refreshing in 5:00</div>
+  </div>
+</div>
+
+<div class="rm-wrap">
+
+  <div id="rm-error"></div>
+  <div id="rm-loading">Loading river data…</div>
+
+  <div id="rm-content" style="display:none;">
+
+    <!-- State hero -->
+    <div id="rm-state-hero">
+      <div id="rm-state-label">—</div>
+      <div id="rm-state-subtitle">Loading…</div>
+    </div>
+
+    <!-- Level -->
+    <div id="rm-level-display">
+      <div class="rm-level-block">
+        <div class="rm-level-value" id="rm-level-m">—</div>
+        <div class="rm-level-unit">metres</div>
+      </div>
+      <div class="rm-level-divider">/</div>
+      <div class="rm-level-block">
+        <div class="rm-level-value" id="rm-level-ft">—</div>
+        <div class="rm-level-unit">feet</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="rm-stats-grid">
+      <div class="rm-stat-card">
+        <div class="rm-label">Below Threshold</div>
+        <div class="rm-value" id="rm-below-ft">—</div>
+        <div class="rm-sub" id="rm-below-m">—</div>
+      </div>
+      <div class="rm-stat-card">
+        <div class="rm-label">ETA to Threshold</div>
+        <div class="rm-value" id="rm-eta">—</div>
+        <div class="rm-sub" id="rm-eta-sub">—</div>
+      </div>
+      <div class="rm-stat-card">
+        <div class="rm-label">Rise / Fall Rate</div>
+        <div class="rm-value" id="rm-rate">—</div>
+        <div class="rm-sub">cm per hour</div>
+      </div>
+      <div class="rm-stat-card">
+        <div class="rm-label">Flood Threshold</div>
+        <div class="rm-value" id="rm-thr-ft">—</div>
+        <div class="rm-sub" id="rm-thr-m">—</div>
+      </div>
+      <div class="rm-stat-card">
+        <div class="rm-label">Warning Zone</div>
+        <div class="rm-value" id="rm-warn-ft">—</div>
+        <div class="rm-sub" id="rm-warn-m">—</div>
+      </div>
+      <div class="rm-stat-card">
+        <div class="rm-label">Station</div>
+        <div class="rm-value" style="font-size:0.95rem; padding-top:4px;">25017</div>
+        <div class="rm-sub">OPW · Shannon</div>
+      </div>
+    </div>
+
+    <!-- Threshold bar -->
+    <div id="rm-threshold-section">
+      <div class="rm-bar-label">
+        <span>Low</span>
+        <span id="rm-bar-pct">—% of flood threshold</span>
+      </div>
+      <div id="rm-bar-bg">
+        <div id="rm-bar-fill" style="width:0%"></div>
+        <div id="rm-warn-marker"      style="left:0%"></div>
+        <div id="rm-threshold-marker" style="left:0%"></div>
+      </div>
+    </div>
+
+    <!-- 24h chart -->
+    <div class="rm-chart-section">
+      <h2>Last 24 hours</h2>
+      <div class="rm-chart-wrap"><canvas id="rm-chart-24h"></canvas></div>
+    </div>
+
+    <!-- 30-day chart -->
+    <div class="rm-chart-section">
+      <h2>Last 30 days</h2>
+      <div class="rm-chart-wrap tall"><canvas id="rm-chart-30d"></canvas></div>
+    </div>
+
+    <div class="rm-footer-note">
+      Data: <a href="https://waterlevel.ie" target="_blank">waterlevel.ie</a> (OPW Ireland) ·
+      Flood threshold: 2.695 m · Refreshes every 5 minutes
+    </div>
+
+  </div><!-- /rm-content -->
+</div><!-- /rm-wrap -->
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────────
+const RM_WORKER_URL  = 'https://banagher-flood-monitor.YOUR-SUBDOMAIN.workers.dev';
+const RM_OPW_MONTH   = 'https://waterlevel.ie/data/month/25017_0001.csv';
+const RM_REFRESH     = 300; // seconds
+
+// ── State styles ─────────────────────────────────────────────────────────────
+const RM_STATES = {
+  NORMAL:  { bg:'#064e3b', border:'#059669', text:'#34d399', label:'NORMAL',  sub:'River within normal range' },
+  WARNING: { bg:'#451a03', border:'#d97706', text:'#fbbf24', label:'WARNING', sub:'Approaching flood threshold — monitor closely' },
+  FLOOD:   { bg:'#450a0a', border:'#dc2626', text:'#f87171', label:'FLOOD',   sub:'River above flood threshold' },
+};
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+const mToFt  = m => (m / 0.3048).toFixed(2) + ' ft';
+const fmtM   = m => m.toFixed(3) + ' m';
+const fmtRate = r => r === null ? '—' : (r >= 0 ? '+' : '') + r.toFixed(1);
+
+function fmtETA(min) {
+  if (min === null) return '—';
+  if (min < 60) return min + ' min';
+  const h = Math.floor(min / 60), m = min % 60;
+  return m > 0 ? `${h}h ${m}m` : `${h}h`;
+}
+function fmtDt(str) {
+  if (!str) return '—';
+  const d = new Date(str.replace(' ', 'T'));
+  return isNaN(d) ? str : d.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function applyState(state) {
+  const s = RM_STATES[state] || RM_STATES.NORMAL;
+  const hero = document.getElementById('rm-state-hero');
+  hero.style.background  = s.bg;
+  hero.style.borderColor = s.border;
+  ['rm-state-label','rm-state-subtitle'].forEach(id => document.getElementById(id).style.color = s.text);
+  document.getElementById('rm-state-label').textContent    = s.label;
+  document.getElementById('rm-state-subtitle').textContent = s.sub;
+  document.querySelectorAll('.rm-level-value').forEach(el => el.style.color = s.text);
+}
+
+function renderStatus(d) {
+  applyState(d.state);
+  document.getElementById('rm-level-m').textContent  = fmtM(d.level);
+  document.getElementById('rm-level-ft').textContent = (d.level / 0.3048).toFixed(2);
+
+  const below = d.below_threshold_m, above = below < 0;
+  document.getElementById('rm-below-ft').textContent = above ? '+' + mToFt(Math.abs(below)) + ' above' : mToFt(below) + ' below';
+  document.getElementById('rm-below-m').textContent  = above ? '+' + fmtM(Math.abs(below)) + ' above threshold' : fmtM(below) + ' below threshold';
+
+  document.getElementById('rm-eta').textContent     = fmtETA(d.eta_minutes);
+  document.getElementById('rm-eta-sub').textContent = d.eta_minutes !== null ? 'if current rate holds' : d.state === 'FLOOD' ? 'already in flood' : 'not rising';
+  document.getElementById('rm-rate').textContent    = fmtRate(d.slope_cm_per_hr);
+
+  document.getElementById('rm-thr-ft').textContent  = mToFt(d.threshold);
+  document.getElementById('rm-thr-m').textContent   = fmtM(d.threshold);
+
+  const warnLevel = d.threshold - 0.20;
+  document.getElementById('rm-warn-ft').textContent = mToFt(warnLevel);
+  document.getElementById('rm-warn-m').textContent  = fmtM(warnLevel) + ' (−20 cm)';
+
+  document.getElementById('rm-reading-time').textContent = 'Reading: ' + fmtDt(d.last_reading_datetime);
+
+  const scale   = d.threshold + 0.30;
+  const fillPct = Math.min((d.level / scale) * 100, 100);
+  document.getElementById('rm-bar-fill').style.width         = fillPct + '%';
+  document.getElementById('rm-warn-marker').style.left       = ((d.threshold - 0.20) / scale * 100) + '%';
+  document.getElementById('rm-threshold-marker').style.left  = (d.threshold / scale * 100) + '%';
+  document.getElementById('rm-bar-pct').textContent          = Math.round((d.level / d.threshold) * 100) + '% of flood threshold';
+}
+
+// ── Charts ────────────────────────────────────────────────────────────────────
+let rmChart24 = null, rmChart30 = null;
+
+const rmChartOpts = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: {
+    backgroundColor: '#1a1d27', borderColor: '#2a2d3a', borderWidth: 1,
+    titleColor: '#94a3b8', bodyColor: '#e2e8f0',
+    callbacks: { label: ctx => ` ${ctx.parsed.y.toFixed(3)} m  (${(ctx.parsed.y/0.3048).toFixed(2)} ft)` },
+  }},
+  scales: {
+    x: { grid:{color:'#1e293b'}, ticks:{color:'#475569', maxTicksLimit:8, maxRotation:0} },
+    y: { grid:{color:'#1e293b'}, ticks:{color:'#475569', callback: v => v.toFixed(2)+'m'} },
+  },
+};
+
+function mkDatasets(labels, values, threshold) {
+  const n = labels.length;
+  return { labels, datasets: [
+    { data: values, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.08)', fill:true, tension:0.3, pointRadius:0, borderWidth:2 },
+    { data: Array(n).fill(threshold - 0.20), borderColor:'#f59e0b', borderDash:[5,4], borderWidth:1, pointRadius:0, fill:false },
+    { data: Array(n).fill(threshold),        borderColor:'#ef4444', borderDash:[5,4], borderWidth:1, pointRadius:0, fill:false },
+  ]};
+}
+
+function render24h(history, threshold) {
+  const labels = history.map(r => { const d = new Date(r.datetime.replace(' ','T')); return isNaN(d) ? r.datetime : d.toLocaleTimeString('en-IE',{hour:'2-digit',minute:'2-digit'}); });
+  const values = history.map(r => r.level);
+  if (rmChart24) rmChart24.destroy();
+  rmChart24 = new Chart(document.getElementById('rm-chart-24h').getContext('2d'), { type:'line', data: mkDatasets(labels, values, threshold), options: rmChartOpts });
+}
+
+function render30d(csv, threshold) {
+  const lines = csv.trim().split('\n').slice(1);
+  const labels = [], values = [];
+  lines.forEach(line => {
+    const [dt, val] = line.split(',');
+    if (!dt || !val) return;
+    const d = new Date(dt.trim().replace(' ','T'));
+    labels.push(isNaN(d) ? dt.trim() : d.toLocaleDateString('en-IE',{day:'2-digit',month:'short'}));
+    values.push(parseFloat(val.trim()));
+  });
+  const tl = labels.filter((_,i) => i%8===0);
+  const tv = values.filter((_,i) => i%8===0);
+  if (rmChart30) rmChart30.destroy();
+  rmChart30 = new Chart(document.getElementById('rm-chart-30d').getContext('2d'), {
+    type:'line', data: mkDatasets(tl, tv, threshold),
+    options: { ...rmChartOpts, scales: { ...rmChartOpts.scales, x: { ...rmChartOpts.scales.x, ticks:{color:'#475569',maxTicksLimit:12,maxRotation:0} } } }
+  });
+}
+
+// ── Fetch ─────────────────────────────────────────────────────────────────────
+let rmCountdown = null, rmSecsLeft = RM_REFRESH;
+
+function startCountdown() {
+  if (rmCountdown) clearInterval(rmCountdown);
+  rmSecsLeft = RM_REFRESH;
+  rmCountdown = setInterval(() => {
+    rmSecsLeft--;
+    const m = Math.floor(rmSecsLeft/60), s = String(rmSecsLeft%60).padStart(2,'0');
+    document.getElementById('rm-countdown').textContent = `Refreshing in ${m}:${s}`;
+    if (rmSecsLeft <= 0) rmRefresh();
+  }, 1000);
+}
+
+async function rmRefresh() {
+  try {
+    const [status, history, month] = await Promise.all([
+      fetch(`${RM_WORKER_URL}/status`).then(r => { if(!r.ok) throw new Error(`Worker ${r.status}`); return r.json(); }),
+      fetch(`${RM_WORKER_URL}/history`).then(r => r.json()),
+      fetch(RM_OPW_MONTH).then(r => r.text()).catch(() => null),
+    ]);
+
+    document.getElementById('rm-loading').style.display  = 'none';
+    document.getElementById('rm-error').style.display    = 'none';
+    document.getElementById('rm-content').style.display  = 'block';
+
+    renderStatus(status);
+    if (history.length > 0) render24h(history, status.threshold);
+    if (month) render30d(month, status.threshold);
+
+    startCountdown();
+  } catch(err) {
+    document.getElementById('rm-loading').style.display = 'none';
+    const el = document.getElementById('rm-error');
+    el.textContent = '⚠ ' + err.message + ' — check Worker URL or try again shortly.';
+    el.style.display = 'block';
+    startCountdown();
+  }
+}
+
+rmRefresh();
+</script>
+
+{% endblock %}
