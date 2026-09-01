@@ -1,14 +1,14 @@
 :root {
-    --primary-color: #9b2226;
-    /* Ruby Red */
-    --secondary-color: #ca6702;
-    /* Burnt Orange */
-    --accent-color: #e9d8a6;
-    /* Vanilla/Cream */
-    --background-color: #fdfcf0;
-    /* Ivory/Warm White */
-    --text-color: #3d2b1f;
-    /* Dark Coffee */
+    --primary-color: #005f73;
+    /* Deep Sea Blue */
+    --secondary-color: #0a9396;
+    /* Teal */
+    --accent-color: #94d2bd;
+    /* Light Teal */
+    --background-color: #f1faee;
+    /* Off-white */
+    --text-color: #1d3557;
+    /* Dark Slate */
     --white: #ffffff;
     --font-heading: 'Geist', 'Montserrat', sans-serif;
     --font-body: 'Geist', 'Open Sans', sans-serif;
