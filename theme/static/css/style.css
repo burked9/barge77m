@@ -230,11 +230,11 @@ a:hover {
 }
 
 .full-width-banner {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.55)), url('../images/global-bg.jpg');
+    background-image: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('../images/shorthall.jpg');
     background-size: cover;
     background-position: center;
-    height: 80vh;
-    min-height: 520px;
+    height: 85vh;
+    min-height: 560px;
     display: flex;
     align-items: center;
     justify-content: center;
