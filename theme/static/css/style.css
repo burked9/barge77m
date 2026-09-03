@@ -563,6 +563,108 @@ img {
     opacity: 0.9;
 }
 
+/* Homepage Featured Fleet Grid */
+.featured-fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin: 2rem 0;
+}
+
+.fleet-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.fleet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.fleet-card-img-wrapper {
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.fleet-card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0 !important;
+    max-width: 100% !important;
+    transition: transform 0.3s ease;
+}
+
+.fleet-card:hover .fleet-card-img-wrapper img {
+    transform: scale(1.04);
+}
+
+.fleet-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.fleet-card-badge {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.fleet-card-body h3 {
+    margin: 0.2rem 0 0.3rem 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.fleet-card-specs {
+    font-size: 0.84rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.fleet-card-body p {
+    font-size: 0.92rem;
+    color: #334155;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    flex: 1;
+}
+
+.fleet-card-btn {
+    display: inline-block;
+    text-align: center;
+    background: var(--primary-color);
+    color: #ffffff !important;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.fleet-card-btn:hover {
+    background: var(--secondary-color);
+}
+
 /* Vessel Profile WOW Hero Header Banner */
 .vessel-page-hero {
     background-size: cover;
