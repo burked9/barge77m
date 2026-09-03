@@ -5,10 +5,13 @@ URL: pages/bargehibernia.html
 Slug: bargehibernia
 Tags: Launch, Maintenance, Lough Derg, Lough Ree, Lough Neagh
 
-![Barge Hibernia]({static}/images/vessels/hibernia/hibernia_old.jpg)
-*Barge Hibernia — Built by Portadown Foundry in 1912, a unique Lagan lighter and early pleasure conversion.*
-
----
+<div class="vessel-page-hero vessel-hero-hibernia">
+    <div class="vessel-hero-overlay">
+        <span class="vessel-hero-badge">Portadown Foundry (1912)</span>
+        <h2>Barge Hibernia</h2>
+        <p class="vessel-hero-sub">63 ft × 15 ft • Lagan Lighter & Ireland's Earliest Luxury Barge Conversion • Portaneena, Lough Ree</p>
+    </div>
+</div>
 
 ## Vessel Overview & Specifications
 
@@ -31,10 +34,13 @@ While living aboard old barges was not unknown, *Hibernia* was probably the earl
 
 The top deck was covered in wood and fitted out with cut-glass doghouses. Inside, she featured tiled concrete floors, a fireplace, and domestic plumbing such as a bath. Those who remember her from the 1940s and 1950s recall that she was fitted out like a palace.
 
+![Barge Hibernia]({static}/images/vessels/hibernia/hibernia_old.jpg)
+*Barge Hibernia — Historic archival photo showing her distinctive raised superstructure and portholes.*
+
 ### Submergence on the Bann & The "Mud Bucket" Refloating (1964 – 2003)
 In 1964, *Hibernia* was moved to the Upper Bann just below the M1 motorway bridge, where she was later vandalized and eventually sank. She remained submerged for nearly four decades.
 
-Years later, a prospective barge owner spotted her sunken hull from the M1 bridge. After tracking down her owner, a deal was struck. It took a dedicated crew several months to clear tens of tonnes of mud from her hull, earning her the affectionate nickname **"The Mud Bucket"**.
+Years later, a prospective barge owner who had caught the "barge bug" while spending time on converted barges on the Shannon remembered seeing her hull submerged in mud from the M1 bridge. After tracking down her owner, a deal was struck. It took a dedicated crew several months to clear tens of tonnes of mud from her hull, earning her the affectionate nickname **"The Mud Bucket"**.
 
 During heavy rainfall one night, the suction of the mud under her hull finally let go and *Hibernia* refloated herself, slipping her moorings and floating a mile downstream before being secured. She was towed by Mick Savage's vessel *Naomi* to Battery Harbour for full cleaning, before being towed across Lough Neagh to Toome for hull restoration.
 
