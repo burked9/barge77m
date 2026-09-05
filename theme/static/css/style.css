@@ -665,6 +665,39 @@ img {
     background: var(--secondary-color);
 }
 
+/* Gallery Filter Pills Widget */
+.gallery-filter-pill {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.gallery-filter-pill:hover {
+    background: #f1f5f9;
+    color: var(--primary-color);
+    border-color: #94a3b8;
+}
+
+.gallery-filter-pill.active {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+}
+
+.gallery-card-item:hover img {
+    transform: scale(1.06);
+}
+
 /* Vessel Profile WOW Hero Header Banner */
 .vessel-page-hero {
     background-size: cover;
